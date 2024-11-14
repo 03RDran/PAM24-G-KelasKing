@@ -1,0 +1,16 @@
+{
+  "name": "backend",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon src/index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "mysql2": "^3.11.4"
+  }
+}

@@ -1,0 +1,14 @@
+services:
+  # --- INSTANCE ---
+  backend:
+    build: ./services/backend
+    depends_on:
+      db: { condition: service_healthy }
+
+  # --- INFRASTRUCTURE ---
+  db:
+    build: ./services/db
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - ./volumes/db/data:/var/lib/mysql:rw

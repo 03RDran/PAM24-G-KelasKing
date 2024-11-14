@@ -1,0 +1,6 @@
+node_modules/
+volumes/*
+.env
+
+# Exclusions
+!volumes/.gitkeep
