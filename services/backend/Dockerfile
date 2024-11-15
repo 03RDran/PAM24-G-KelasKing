@@ -3,7 +3,7 @@ FROM node:18-bullseye
 
 # Install ping and curl
 RUN apt-get update && \
-    apt-get install -y iputils-ping curl postgresql-client && \
+    apt-get install -y iputils-ping curl && \
     rm -rf /var/lib/apt/lists/*
 
 # Install NPM requisites

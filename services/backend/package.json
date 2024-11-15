@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "private": true,
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "node .",
     "dev": "nodemon src/index.js"
@@ -10,6 +10,7 @@
     "nodemon": "^3.1.0"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "mysql2": "^3.11.4"
   }

@@ -9,6 +9,8 @@ services:
       - DB_USER
       - DB_PASSWORD
       - DB_NAME
+    ports:
+      - 3000
 
   # --- INFRASTRUCTURE ---
   db:
@@ -16,6 +18,21 @@ services:
     volumes:
       - ./volumes/db/data:/var/lib/mysql:rw
     environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: yes
       MYSQL_DATABASE: $DB_NAME
       MYSQL_USER: $DB_USER
       MYSQL_PASSWORD: $DB_PASSWORD
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-u$MYSQL_USER",
+          "-p$MYSQL_PASSWORD",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
