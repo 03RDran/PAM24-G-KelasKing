@@ -4,11 +4,18 @@ services:
     build: ./services/backend
     depends_on:
       db: { condition: service_healthy }
+    environment:
+      - DB_HOST
+      - DB_USER
+      - DB_PASSWORD
+      - DB_NAME
 
   # --- INFRASTRUCTURE ---
   db:
     build: ./services/db
-    environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - ./volumes/db/data:/var/lib/mysql:rw
+    environment:
+      MYSQL_DATABASE: $DB_NAME
+      MYSQL_USER: $DB_USER
+      MYSQL_PASSWORD: $DB_PASSWORD
