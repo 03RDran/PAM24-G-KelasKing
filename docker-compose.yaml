@@ -10,7 +10,7 @@ services:
       - DB_PASSWORD
       - DB_NAME
     ports:
-      - 3000
+      - 8080:8080
 
   # --- INFRASTRUCTURE ---
   db:
@@ -30,8 +30,8 @@ services:
           "ping",
           "-h",
           "localhost",
-          "-u$MYSQL_USER",
-          "-p$MYSQL_PASSWORD",
+          "-u$DB_USER",
+          "-p$DB_PASSWORD",
         ]
       interval: 10s
       timeout: 5s
