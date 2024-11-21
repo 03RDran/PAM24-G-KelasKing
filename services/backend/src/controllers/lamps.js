@@ -13,6 +13,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Get a single lamp by ID
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const [lamp] = await db.query("SELECT * FROM lamps WHERE id = ?", [id]);
+    if (lamp.length === 0) {
+      return res.status(404).json({ error: "Lamp not found" });
+    }
+    res.json(lamp[0]);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Create a new lamp
 router.post("/", async (req, res) => {
   const { id_product, location, installation_date, status, owner_id } =
@@ -35,5 +49,44 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Additional routes for lamps...
+// Update a lamp by ID
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { id_product, location, installation_date, status, owner_id } =
+    req.body;
+  try {
+    const [result] = await db.query(
+      "UPDATE lamps SET id_product = ?, location = ?, installation_date = ?, status = ?, owner_id = ? WHERE id = ?",
+      [id_product, location, installation_date, status, owner_id, id]
+    );
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Lamp not found" });
+    }
+    res.json({
+      id,
+      id_product,
+      location,
+      installation_date,
+      status,
+      owner_id,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Delete a lamp by ID
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const [result] = await db.query("DELETE FROM lamps WHERE id = ?", [id]);
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Lamp not found" });
+    }
+    res.status(204).send(); // No content
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;
