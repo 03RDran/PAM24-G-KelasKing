@@ -1,6 +1,7 @@
 const bodyParser = require("body-parser");
 const express = require("express");
 
+const authRoutes = require("./controllers/auth");
 const userRoutes = require("./controllers/users");
 const lampRoutes = require("./controllers/lamps");
 const settingRoutes = require("./controllers/settings");
@@ -10,6 +11,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
+app.use("/", authRoutes);
 app.use("/users", userRoutes);
 app.use("/lamps", lampRoutes);
 app.use("/settings", settingRoutes);
