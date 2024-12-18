@@ -63,7 +63,7 @@ void setup() {
     while (1);
   }
   if (rtc.lostPower()) {
-    rtc.adjust(DateTime(F( _DATE), F(TIME_)));
+    rtc.adjust(DateTime(F( _DATE_), F(_TIME_)));
   }
 
   // Initialize GPS
