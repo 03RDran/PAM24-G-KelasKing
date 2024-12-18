@@ -4,13 +4,12 @@
 #include <Adafruit_GPS.h>
 
 // Replace with your network credentials
-#define SSID     "Redmi Pro"
-#define PASSWORD "mandibau"
+#define SSID     "RR"
+#define PASSWORD "123456"
 
 // Replace with your SERVER details
-#define SERVER "192.168.109.204" 
-// ip laptop (local server), ganti wifi ganti ip
-#define PORT   8080 // HTTP PORT for local SERVER
+#define SERVER "192.168.0.105" // Local SERVER IP address. ganti wifi = ganti ip
+#define PORT   8080              // HTTP PORT for local SERVER
 
 // Unique lamp ID
 #define LAMP_ID 1 // Set a unique ID for each lamp
@@ -63,7 +62,7 @@ void setup() {
     while (1);
   }
   if (rtc.lostPower()) {
-    rtc.adjust(DateTime(F( _DATE_), F(_TIME_)));
+    rtc.adjust(DateTime(F( __DATE__), F(__TIME__)));
   }
 
   // Initialize GPS
@@ -189,5 +188,5 @@ void loop() {
   Serial.print(now.second(), DEC);
   Serial.println();
 
-  delay(10000); // Send data every 10 seconds
+  delay(10000); // Send data every 10 seconds
 }
